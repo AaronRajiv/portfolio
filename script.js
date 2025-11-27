@@ -1,30 +1,23 @@
 function validateForm(e) {
-    e.preventDefault(); // Stop page reload
+    e.preventDefault();
 
-    var usnInput = document.getElementById('usn');
-    var errorText = document.getElementById('usnError');
-    var successText = document.getElementById('successMsg');
+    var usn = document.getElementById('usn');
+    var error = document.getElementById('usnError');
+    var success = document.getElementById('successMsg');
     var form = document.getElementById('contactForm');
 
-    // 1. Check USN Format
-    // Format: 4 + 2 letters + 2 digits + 2 letters + 3 digits (e.g. 4MC22CS001)
-    var usnRegex = /^4[A-Z]{2}\d{2}[A-Z]{2}\d{3}$/i;
+    var regex = /^4[A-Z]{2}\d{2}[A-Z]{2}\d{3}$/i;
 
-    if (usnRegex.test(usnInput.value)) {
-        // Success
-        errorText.style.display = 'none';
-        successText.style.display = 'block';
+    if (regex.test(usn.value)) {
+        error.style.display = 'none';
+        success.style.display = 'block';
+        form.reset();
         
-        // Reset the form
-        form.reset(); 
-        
-        // Hide success message after 3 seconds
         setTimeout(function() { 
-            successText.style.display = 'none'; 
+            success.style.display = 'none'; 
         }, 3000);
     } else {
-        // Error
-        errorText.style.display = 'block';
-        successText.style.display = 'none';
+        error.style.display = 'block';
+        success.style.display = 'none';
     }
 }
